@@ -10,12 +10,12 @@ local riseoptions = {
 
 local risethemes = {
     ["Rise Blend"] = {
-        TextGUIColor1 = Color3.fromRGB(71, 233, 160),
-        TextGUIColor2 = Color3.fromRGB(71, 148, 253),
+        TextGUIColor1 = Color3.fromRGB(79, 12, 12),
+        TextGUIColor2 = Color3.fromRGB(12, 28, 79),
     },
     ["Rise"] = {
-        TextGUIColor1 = Color3.fromRGB(255, 255, 255),
-        TextGUIColor2 = Color3.fromRGB(255, 255, 255),
+        TextGUIColor1 = Color3.fromRGB(255, 0, 0),
+        TextGUIColor2 = Color3.fromRGB(0, 174, 255),
     },
     ["Rise Christmas"] = {
         TextGUIColor1 = Color3.fromRGB(255, 12, 12),
@@ -73,7 +73,7 @@ local function GetURL(scripturl, rise)
         end
         return readfile((rise and "rise/" or "vape/")..scripturl)
     else
-        local res = game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/"..(rise and "RiseForRoblox" or "VapeV4ForRoblox").."/main/"..scripturl, true)
+        local res = game:HttpGet("https://raw.githubusercontent.com/LilyBlixz/"..(rise and "RiseForRoblox" or "VapeV4ForRoblox").."/main/"..scripturl, true)
         assert(res ~= "404: Not Found", "File not found")
         return res
     end
@@ -106,7 +106,7 @@ local function getcustomassetfunc(path)
             textlabel:Remove()
         end)
         local req = requestfunc({
-            Url = "https://raw.githubusercontent.com/7GrandDadPGN/RiseForRoblox/main/"..path:gsub("rise/assets", "assets"),
+            Url = "https://raw.githubusercontent.com/LilyBlixz/RiseForRoblox/main/"..path:gsub("rise/assets", "assets"),
             Method = "GET"
         })
         writefile(path, req.Body)
@@ -119,7 +119,7 @@ end
 
 local teleportfunc = game:GetService("Players").LocalPlayer.OnTeleport:Connect(function(State)
     if State == Enum.TeleportState.Started then
-		local teleportstr = 'shared.VapeSwitchServers = true if shared.VapeDeveloper then loadstring(readfile("rise/main.lua"))() else loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/RiseForRoblox/main/main.lua", true))() end'
+		local teleportstr = 'shared.VapeSwitchServers = true if shared.VapeDeveloper then loadstring(readfile("rise/main.lua"))() else loadstring(game:HttpGet("https://raw.githubusercontent.com/LilyBlixz/RiseForRoblox/main/main.lua", true))() end'
 		if shared.VapeDeveloper then
 			teleportstr = 'shared.VapeDeveloper = true '..teleportstr
 		end
@@ -396,41 +396,41 @@ windowtabs.World:CreateButton({
 })
 
 local modal = Instance.new("TextButton")
-modal.Size = UDim2.new(0, 0, 0, 0)
+modal.Size = UDim2.new(0, 64, 64, 0)
 modal.BorderSizePixel = 0
 modal.Text = ""
 modal.Modal = true
 modal.Parent = guilib.ScreenGui.MainFrame
 local targetinfo = Instance.new("Frame")
-targetinfo.Size = UDim2.new(0, 258, 0, 80)
+targetinfo.Size = UDim2.new(0, 297, 0, 98)
 targetinfo.Visible = false
 targetinfo.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-targetinfo.BackgroundTransparency = 0.5
+targetinfo.BackgroundTransparency = 0
 targetinfo.Position = UDim2.new(0.5, 72, 0.5, 54)
 targetinfo.ClipsDescendants = true
 targetinfo.Parent = guilib.ScreenGui
 local targetinfoscale = Instance.new("UIScale")
 targetinfoscale.Parent = targetinfo
 targetinfo:GetPropertyChangedSignal("Size"):connect(function()
-    targetinfoscale.Scale = targetinfo.Size.X.Offset / 258
+    targetinfoscale.Scale = targetinfo.Size.X.Offset / 195
 end)
 local targetinfocorner = Instance.new("UICorner")
-targetinfocorner.CornerRadius = UDim.new(0, 8)
+targetinfocorner.CornerRadius = UDim.new(0, 0)
 targetinfocorner.Parent = targetinfo
 local targetinfopictureframe = Instance.new("Frame")
-targetinfopictureframe.Size = UDim2.new(0, 64, 0, 63)
+targetinfopictureframe.Size = UDim2.new(0, 40, 0, 40)
 targetinfopictureframe.AnchorPoint = Vector2.new(0.5, 0.5)
-targetinfopictureframe.Position = UDim2.new(0, 38, 0, 39)
-targetinfopictureframe.BackgroundTransparency = 0.8
+targetinfopictureframe.Position = UDim2.new(0, 27.5, 0, 27.5)
+targetinfopictureframe.BackgroundTransparency = 0
 targetinfopictureframe.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 targetinfopictureframe.Parent = targetinfo
 local targetinfopictureframecorner = Instance.new("UICorner")
-targetinfopictureframecorner.CornerRadius = UDim.new(0, 128)
+targetinfopictureframecorner.CornerRadius = UDim.new(0, 0)
 targetinfopictureframecorner.Parent = targetinfopictureframe
 local targetinfopicture = Instance.new("ImageLabel")
-targetinfopicture.Size = UDim2.new(1, -4, 1, -4)
+targetinfopicture.Size = UDim2.new(1, -2, 1, -2)
 targetinfopicture.Position = UDim2.new(0, 2, 0, 2)
-targetinfopicture.BackgroundTransparency = 1
+targetinfopicture.BackgroundTransparency = 0.8
 targetinfopicture.ScaleType = Enum.ScaleType.Fit
 targetinfopicture.Image = 'rbxthumb://type=AvatarHeadShot&id=1&w=420&h=420'
 targetinfopicture.Parent = targetinfopictureframe
@@ -438,10 +438,10 @@ local targetinfopicturecorner = Instance.new("UICorner")
 targetinfopicturecorner.CornerRadius = UDim.new(0, 128)
 targetinfopicturecorner.Parent = targetinfopicture
 local targetinfohealthbar = Instance.new("Frame")
-targetinfohealthbar.Position = UDim2.new(0, 74, 0, 55)
+targetinfohealthbar.Position = UDim2.new(0, 6, 0, 54)
 targetinfohealthbar.BackgroundColor3 = Color3.fromRGB(133, 77, 195)
 targetinfohealthbar.BorderSizePixel = 0
-targetinfohealthbar.Size = UDim2.new(0, 140, 0, 10)
+targetinfohealthbar.Size = UDim2.new(0, 250, 0, 20)
 targetinfohealthbar.Parent = targetinfo
 local notificationwindow = Instance.new("Frame")
 notificationwindow.Size = UDim2.new(1, 0, 1, 0)
@@ -474,34 +474,25 @@ spawn(function()
 end)
 local targetinfoname = Instance.new("TextLabel")
 targetinfoname.Font = Enum.Font.TitilliumWeb
-targetinfoname.TextSize = 40
+targetinfoname.TextSize = 21
 targetinfoname.BackgroundTransparency = 1 
 targetinfoname.TextColor3 = Color3.new(1, 1, 1)
-targetinfoname.Text = "Target info"
+targetinfoname.Text = "Lilyownsbedwars334"
 targetinfoname.TextXAlignment = Enum.TextXAlignment.Left
-targetinfoname.Size = UDim2.new(1, -72, 0, 40)
+targetinfoname.Size = UDim2.new(1, -55, 0, 21)
 targetinfoname.TextScaled = true
-targetinfoname.Position = UDim2.new(0, 72, 0, 13)
+targetinfoname.Position = UDim2.new(0, 55, 0, 0)
 targetinfoname.Parent = targetinfo
 local targetinfohealthtext = Instance.new("TextLabel")
 targetinfohealthtext.Font = Enum.Font.TitilliumWeb
-targetinfohealthtext.TextSize = 26
+targetinfohealthtext.TextSize = 22
 targetinfohealthtext.BackgroundTransparency = 1 
 targetinfohealthtext.TextColor3 = Color3.new(1, 1, 1)
 targetinfohealthtext.Text = "20.0"
-targetinfohealthtext.TextXAlignment = Enum.TextXAlignment.Left
+targetinfohealthtext.TextXAlignment = Enum.TextXAlignment.Center
 targetinfohealthtext.Size = UDim2.new(0, 20, 0, 30)
-targetinfohealthtext.Position = UDim2.new(0, 219, 0, 43)
+targetinfohealthtext.Position = UDim2.new(0, 125.5, 0, 48)
 targetinfohealthtext.Parent = targetinfo
-local targetinfodamage = Instance.new("Frame")
-targetinfodamage.BackgroundTransparency = 1
-targetinfodamage.BorderSizePixel = 0
-targetinfodamage.BackgroundColor3 = Color3.new(1, 0, 0)
-targetinfodamage.Size = UDim2.new(1, 0, 1, 0)
-targetinfodamage.Parent = targetinfopictureframe
-local targetinfodamagecorner = Instance.new("UICorner")
-targetinfodamagecorner.CornerRadius = UDim.new(0, 128)
-targetinfodamagecorner.Parent = targetinfodamage
 local targetvape = shared.VapeTargetInfo
 local oldupdate = targetvape.UpdateInfo
 local lasthealth = 100
@@ -535,21 +526,10 @@ targetvape.UpdateInfo = function(tab, targetsize)
 		local plr = game:GetService("Players"):FindFirstChild(i)
         if lastplr ~= plr then 
             lastplr = plr
-        else
-            if v["Health"] < lasthealth then 
-                targetinfopictureframe.Size = UDim2.new(0, 59, 0, 58)
-                targetinfopictureframe:TweenSize(UDim2.new(0, 64, 0, 63), Enum.EasingDirection.InOut, Enum.EasingStyle.Linear, 0.4, true)
-                if healthanim then 
-                    healthanim:Cancel()
-                end
-                targetinfodamage.BackgroundTransparency = 0.4
-                healthanim = game:GetService("TweenService"):Create(targetinfodamage, TweenInfo.new(0.4), {BackgroundTransparency = 1})
-                healthanim:Play()
-            end
         end
         lasthealth = v["Health"]
 		targetinfopicture.Image = 'rbxthumb://type=AvatarHeadShot&id='..v["UserId"]..'&w=420&h=420'
-		targetinfohealthbar:TweenSize(UDim2.new(0, 140 * (v["Health"] / v["MaxHealth"]), 0, 10), Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.2, true)
+		targetinfohealthbar:TweenSize(UDim2.new(0, 250 * (v["Health"] / v["MaxHealth"]), 0, 20), Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.2, true)
 		local healthtext = (math.floor((v["Health"] / 5) * 10) / 10)
         targetinfohealthtext.Text = healthtext..(tostring(healthtext):len() < 3 and ".0" or "")
 		targetinfoname.Text = plr and plr.DisplayName or "Player"
@@ -603,9 +583,9 @@ local function removeTags(str)
 end
 
 local risetext = Instance.new("TextLabel")
-risetext.Text = "Rise"
+risetext.Text = "Smoke"
 risetext.Font = Enum.Font.TitilliumWeb
-risetext.TextSize = 53
+risetext.TextSize = 32
 risetext.TextColor3 = Color3.new(1, 1, 1)
 risetext.BackgroundTransparency = 1
 risetext.TextYAlignment = Enum.TextYAlignment.Top
@@ -625,7 +605,7 @@ risegradient.Parent = risetext
 local risetextversion = risetext:Clone()
 local risetextcustom = risetext:Clone()
 risetextversion.TextSize = 26
-risetextversion.Text = "5.94"
+risetextversion.Text = " "
 risetextversion.Position = UDim2.new(0, 66, 0, 6)
 risetextversion.Parent = risetext
 risetextversion.TextLabel.TextSize = 26
@@ -746,11 +726,11 @@ local function refreshbars(textlists)
 		local textsize = v2.Size or Vector2.new(0, 0)
         local calcnum = (newnum + (i2 / 10)) % 2
 		local frame = Instance.new("TextLabel")
-		frame.BorderSizePixel = 0
-		frame.BackgroundTransparency = 0.62
+		frame.BackgroundTransparency = 1
+                frame.BorderSizePixel = -5
         frame.Text = newstr
         frame.TextSize = 30
-        frame.TextColor3 = Color3.new(1, 0, 0)
+        frame.TextColor3 = Color3.new(0, 0, 0)
         if calcnum < 1 then 
             frame.TextColor3 = risethemes[riseoptions.Theme].TextGUIColor1:lerp(risethemes[riseoptions.Theme].TextGUIColor2, calcnum)
         elseif calcnum < 2 then 
@@ -907,7 +887,7 @@ VapeGui.CreateNotification = function(top, bottom, duration, customicon)
     frame2.Size = UDim2.new(1, 0, 0, 4)
     frame2.Position = UDim2.new(1, 0, 1, -4)
     frame2.BackgroundColor3 = Color3.fromRGB(71, 233, 175)
-    frame2.BorderSizePixel = 0
+    frame2.SizePixel = 0
     frame2.Parent = frame
     textlabel2.Text = newtext
     textlabel2.Parent = frame
